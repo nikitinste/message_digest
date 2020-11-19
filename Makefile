@@ -10,7 +10,7 @@ md5_alg.c
 OBJ = $(addprefix $(OBJPATH)/,$(SRC:.c=.o))
 OBJPATH = ./objects
 
-FLAGS =  -m64 -Ofast -flto -march=native -funroll-loops#-g -Wall -Wextra -Werror
+FLAGS = -g #-Wall -Wextra -Werror
 LIB = -L ./libft -lft
 LIBPATH = ./libft
 

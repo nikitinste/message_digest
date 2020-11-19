@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 15:01:53 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/19 00:11:48 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/19 19:42:34 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,12 @@ void	process_file(t_ssl *ssl, const char* filename)
 
 	ft_bzero(&prc, sizeof(prc));
 	prc.fd = open(FILE_NAME , O_RDONLY);
-	if (prc.fd == -1)
+	if (prc.fd == -1 || \
+		(prc.msg_size = ft_read_to_eof(prc.fd, &prc.message)) == -1)
 	{
 		ft_printf("ft_ssl: %s: %s: %s\n", COMMAND, FILE_NAME, strerror(errno));
 		return ;
 	}
-	if (!(prc.msg_size = ft_read_to_eof(prc.fd, &prc.message)))
-		return ;// show read file error message
 	g_get_hash[ssl->cmd_ind](prc.message, prc.msg_size, &prc.digest);
 	if (ssl->flags & quiet)
 		ft_printf("%s\n", prc.digest);
