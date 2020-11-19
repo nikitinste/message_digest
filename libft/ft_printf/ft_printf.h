@@ -6,16 +6,13 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/15 12:42:21 by uhand             #+#    #+#             */
-/*   Updated: 2019/09/16 12:29:17 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/17 18:53:40 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include <stdarg.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include "../libft.h"
 
 # define P format[p->i]

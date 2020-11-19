@@ -6,21 +6,22 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 22:27:35 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/03 23:14:50 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/19 15:10:46 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_SSL_H
 # define FT_SSL_H
 
-#include <fcntl.h>
+# include <fcntl.h>
 # include "../libft/libft.h"
 
 # define COMMAND g_commands[ssl->cmd_ind]
 # define FILE_NAME ssl->av[ssl->i]
 
 typedef	int		(*t_end_wmsg)(void *params);
-typedef int		(*t_get_hash)(char const *message, char **digest);
+typedef int		(*t_get_hash)(char const *message, size_t msg_size, \
+	char **digest);
 
 typedef union	u_lala
 {
@@ -64,6 +65,7 @@ typedef struct		s_prc_file
 	char		*digest;
 	char		*cmd_name;
 	int			fd;
+	size_t		msg_size;
 }					t_prc_file;
 
 typedef struct		s_ssl
@@ -77,8 +79,8 @@ typedef struct		s_ssl
 
 typedef	int		(*t_end_wmsg)(void *params);
 
-int 	ft_md5(char const *message, char **digest);
-int 	ft_sha256(char const *message, char **digest);
+int		ft_md5(char const *message, size_t msg_size, char **digest);
+int 	ft_sha256(char const *message, size_t msg_size, char **digest);
 int 	show_usage(void *params);
 int 	show_command_error(void *params);
 int		show_flag_error(void *params);

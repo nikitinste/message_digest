@@ -6,7 +6,7 @@
 #    By: uhand <uhand@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/15 12:42:26 by uhand             #+#    #+#              #
-#    Updated: 2020/10/13 17:11:37 by uhand            ###   ########.fr        #
+#    Updated: 2020/11/19 15:06:11 by uhand            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ pft_float_itoa.c pft_float_itoa_2.c pft_float_itoa_3.c double_rep.c \
 ft_sprintf.c ft_fdprintf.c
 
 OBJ = $(SRC:.c=.o)
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -m64 -Ofast -flto -march=native -funroll-loops -Wall -Wextra -Werror
 LIBPATH = ../
 
 all: $(OBJ)

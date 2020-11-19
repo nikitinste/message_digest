@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 16:31:39 by uhand             #+#    #+#             */
-/*   Updated: 2020/10/25 19:26:04 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/19 00:02:11 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ int	ft_read_to_eof(const int fd, char **line)
 		args.bufer = line[0];
 		if (args.ret < BUFF_SIZE)
 			args.buf_line[args.ret] = '\0';
-		line[0] = ft_strjoin(args.bufer, args.buf_line);
+		line[0] = malloc(args.bytes_read_count + args.ret);
+		ft_memcpy((void*)&line[0][0], args.bufer, args.bytes_read_count);
+		ft_memcpy((void*)&line[0][args.bytes_read_count], args.buf_line, args.ret);
 		ft_strdel(&args.bufer);
 		args.bytes_read_count += args.ret;
 	}

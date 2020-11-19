@@ -6,7 +6,7 @@
 #    By: uhand <uhand@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/12/18 18:04:25 by uhand             #+#    #+#              #
-#    Updated: 2020/10/25 19:39:19 by uhand            ###   ########.fr        #
+#    Updated: 2020/11/19 15:06:05 by uhand            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ SRC_2 = $(addprefix ft_printf/,$(SRC_PF))
 
 OBJ = $(SRC:.c=.o) $(SRC_2:.c=.o)
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -m64 -Ofast -flto -march=native -funroll-loops -Wall -Wextra -Werror
 
 all: $(NAME)
 

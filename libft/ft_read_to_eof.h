@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 17:21:14 by uhand             #+#    #+#             */
-/*   Updated: 2020/10/25 18:44:37 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/18 18:57:24 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "libft.h"
 
-# define BUFF_SIZE 32
+# define BUFF_SIZE 102400
 
 typedef struct	s_rte
 {

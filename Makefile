@@ -4,12 +4,13 @@ NAME = ft_ssl
 
 HEAD = ./includes
 SRCPATH = ./srcs
-SRC = ft_ssl.c end_with_message.c process_args.c md5.c sha256.c
+SRC = ft_ssl.c end_with_message.c process_args.c md5.c md5_fghi.c sha256.c \
+md5_alg.c
 
 OBJ = $(addprefix $(OBJPATH)/,$(SRC:.c=.o))
 OBJPATH = ./objects
 
-FLAGS = -g #-Wall -Wextra -Werror
+FLAGS =  -m64 -Ofast -flto -march=native -funroll-loops#-g -Wall -Wextra -Werror
 LIB = -L ./libft -lft
 LIBPATH = ./libft
 
