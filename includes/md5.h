@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 22:21:51 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/20 23:50:37 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/21 00:58:31 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "../includes/ft_ssl.h"
 
-# define READ_BUF_SIZE 1024
+# define READ_BUF_SIZE 10240
 # define BLOCK_SIZE 64
 
 # define A md->digest[0]
