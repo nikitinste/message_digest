@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/25 17:21:14 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/18 18:57:24 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/20 15:27:00 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
 
 typedef struct	s_rte
 {
-	int		bytes_read_count;
+	int		read_count;
 	int		ret;
 	char	*bufer;
-	char	buf_line[BUFF_SIZE + 1];
+	char	buf_line[BUFF_SIZE];
 }				t_rte;
 
 int	ft_read_to_eof(const int fd, char **line);

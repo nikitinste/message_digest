@@ -6,27 +6,18 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 15:01:53 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/19 19:42:34 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/20 22:36:16 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ssl.h"
-#include <errno.h>
-
 
 void	process_stdin(t_ssl *ssl)
 {
-	char	*message;
 	char	*digest;
-	size_t	msg_size;
 
-	if (!(msg_size = ft_read_to_eof(0, &message)))
-		return ;
-	if (ssl->flags & echo)
-		write(1, message, msg_size);
-	g_get_hash[ssl->cmd_ind](message, msg_size, &digest);
+	g_get_hash[ssl->cmd_ind](NULL, 1, (ssl->flags & echo), &digest);
 	ft_printf("%s\n", digest);
-	ft_strdel(&message);
 	ft_strdel(&digest);
 }
 
@@ -36,9 +27,9 @@ void	process_string(t_ssl *ssl, int ac, char const **av)
 	char	*cmd_name;
 
 	if (av[ssl->i][0] != '\0')
-		g_get_hash[ssl->cmd_ind](av[ssl->i], ft_strlen(av[ssl->i]), &digest);
+		g_get_hash[ssl->cmd_ind](av[ssl->i], 0, 0, &digest);
 	else if (++ssl->i < ac)
-		g_get_hash[ssl->cmd_ind](av[ssl->i], ft_strlen(av[ssl->i]), &digest);
+		g_get_hash[ssl->cmd_ind](av[ssl->i], 0, 0, &digest);
 	else
 		g_end_with_message[string_error]((void*)ssl);
 	cmd_name = NULL;
@@ -62,13 +53,12 @@ void	process_file(t_ssl *ssl, const char* filename)
 
 	ft_bzero(&prc, sizeof(prc));
 	prc.fd = open(FILE_NAME , O_RDONLY);
-	if (prc.fd == -1 || \
-		(prc.msg_size = ft_read_to_eof(prc.fd, &prc.message)) == -1)
+	if (prc.fd == -1)
 	{
 		ft_printf("ft_ssl: %s: %s: %s\n", COMMAND, FILE_NAME, strerror(errno));
 		return ;
 	}
-	g_get_hash[ssl->cmd_ind](prc.message, prc.msg_size, &prc.digest);
+	g_get_hash[ssl->cmd_ind](NULL, prc.fd, 0, &prc.digest);
 	if (ssl->flags & quiet)
 		ft_printf("%s\n", prc.digest);
 	else if (ssl->flags & reverse)
@@ -78,7 +68,6 @@ void	process_file(t_ssl *ssl, const char* filename)
 		prc.cmd_name = ft_strmap(COMMAND, &ft_toupchar);
 		ft_printf("%s (%s) = %s\n", prc.cmd_name, FILE_NAME, prc.digest);
 	}
-	ft_strdel(&prc.message);
 	ft_strdel(&prc.digest);
 	ft_strdel(&prc.cmd_name);
 }

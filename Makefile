@@ -1,16 +1,26 @@
-
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: uhand <uhand@student.42.fr>                +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/11/20 15:36:27 by uhand             #+#    #+#              #
+#    Updated: 2020/11/20 22:59:51 by uhand            ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 NAME = ft_ssl
 
 HEAD = ./includes
 SRCPATH = ./srcs
 SRC = ft_ssl.c end_with_message.c process_args.c md5.c md5_fghi.c sha256.c \
-md5_alg.c
+md5_alg.c md5_read.c
 
 OBJ = $(addprefix $(OBJPATH)/,$(SRC:.c=.o))
 OBJPATH = ./objects
 
-FLAGS = -g #-Wall -Wextra -Werror
+FLAGS = -g #-fsanitize=address #-Wall -Wextra -Werror
 LIB = -L ./libft -lft
 LIBPATH = ./libft
 

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 19:18:55 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/19 16:38:20 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/20 20:51:18 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,8 @@ void	round_4(t_md *md)
 
 void md5_alg(t_md *md)
 {
-	unsigned long	i;
-
-	i = 0;
-	while (i < md->blocks_count)
+	while (read_block(md))
 	{
-		ft_memcpy(&(md->x[0]), &(md->flow[i * 64]), 64);
 		ft_memcpy(&(md->digest_buf[0]), &(md->digest[0]), 16);
 		round_1(md);
 		round_2(md);
@@ -109,7 +105,6 @@ void md5_alg(t_md *md)
 		B += BB;
 		C += CC;
 		D += DD;
-		i++;
 	}
 
 }
