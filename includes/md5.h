@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 22:21:51 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/21 00:58:31 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/23 16:51:42 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct		s_md
 	unsigned int	digest[4];
 	unsigned int	digest_buf[4];
 	unsigned int	x[16];
-	int				fd;
+	t_prc_file		*prc;
 	int				print;
 	t_read_buf		rd;
 	size_t			read_count;

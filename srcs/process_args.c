@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 15:01:53 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/20 22:36:16 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/23 16:47:32 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	process_stdin(t_ssl *ssl)
 {
-	char	*digest;
+	t_prc_file	prc;
 
-	g_get_hash[ssl->cmd_ind](NULL, 1, (ssl->flags & echo), &digest);
-	ft_printf("%s\n", digest);
-	ft_strdel(&digest);
+	prc.file_name = "STDIN";
+	prc.fd = 0;
+	g_get_hash[ssl->cmd_ind](NULL, &prc, (ssl->flags & echo), &prc.digest);
+	ft_printf("%s\n", prc.digest);
+	ft_strdel(&prc.digest);
 }
 
 void	process_string(t_ssl *ssl, int ac, char const **av)
@@ -27,9 +29,9 @@ void	process_string(t_ssl *ssl, int ac, char const **av)
 	char	*cmd_name;
 
 	if (av[ssl->i][0] != '\0')
-		g_get_hash[ssl->cmd_ind](av[ssl->i], 0, 0, &digest);
+		g_get_hash[ssl->cmd_ind](av[ssl->i], NULL, 0, &digest);
 	else if (++ssl->i < ac)
-		g_get_hash[ssl->cmd_ind](av[ssl->i], 0, 0, &digest);
+		g_get_hash[ssl->cmd_ind](av[ssl->i], NULL, 0, &digest);
 	else
 		g_end_with_message[string_error]((void*)ssl);
 	cmd_name = NULL;
@@ -58,7 +60,8 @@ void	process_file(t_ssl *ssl, const char* filename)
 		ft_printf("ft_ssl: %s: %s: %s\n", COMMAND, FILE_NAME, strerror(errno));
 		return ;
 	}
-	g_get_hash[ssl->cmd_ind](NULL, prc.fd, 0, &prc.digest);
+	prc.file_name = FILE_NAME;
+	g_get_hash[ssl->cmd_ind](NULL, &prc, 0, &prc.digest);
 	if (ssl->flags & quiet)
 		ft_printf("%s\n", prc.digest);
 	else if (ssl->flags & reverse)

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 17:20:54 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/20 23:53:25 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/23 16:48:00 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int		uppend_block(t_md *md, size_t i)
 		block_ptr[i] = 128;
 		i++;
 	}
-	if ((BLOCK_SIZE - i) > 8)
+	if ((BLOCK_SIZE - i) >= 8)
 	{
 		ft_bzero(&(block_ptr[i]), (BLOCK_SIZE - (i + 8)));
 		l_block_ptr = (unsigned long*)&block_ptr[BLOCK_SIZE - 8];
@@ -84,21 +84,23 @@ int		copy_block(t_md *md)
 
 int		read_from_fd(t_md *md)
 {
-	if (!md->rd.ptr && !(md->rd.ret = read(md->fd, &md->rd.buf, READ_BUF_SIZE)))
+	if (!md->rd.ptr && !(md->rd.ret = read(md->prc->fd, &md->rd.buf, \
+		READ_BUF_SIZE)))
 		return (uppend_block(md, md->rd.ret));
 	else if (md->rd.ptr)
 		return(copy_block(md));
 	else if (md->rd.ret && md->rd.ret != -1)
 	{
+		if (md->print)
+			write(1, md->rd.buf, md->rd.ret);
 		md->rd.ptr = md->rd.buf;
 		return(copy_block(md));
 	}
-	else if (md->rd.ret && md->rd.ret != -1)
+	else if (md->rd.ret && md->rd.ret == -1)
 	{
-		ft_printf("ft_ssl: md5: %s: %s\n", "FILE_NAME", strerror(errno));
+		ft_printf("ft_ssl: md5: %s: %s\n", md->prc->file_name, strerror(errno));
 		exit (-1);
 	}
-
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 22:27:35 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/20 22:36:21 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/23 16:47:25 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 # define COMMAND g_commands[ssl->cmd_ind]
 # define FILE_NAME ssl->av[ssl->i]
 
+typedef struct	s_prc_file t_prc_file;
 typedef	int		(*t_end_wmsg)(void *params);
-typedef int		(*t_get_hash)(char const *message, int fd, int print, \
+typedef int		(*t_get_hash)(char const *message, t_prc_file *prc, int print, \
 	char **digest);
 
 typedef union	u_lala
@@ -30,20 +31,20 @@ typedef union	u_lala
 	unsigned int	b[2];
 }				t_lala;
 
-enum    e_commands
+enum    		e_commands
 {
     md5,
     sha256
 };
 
-static char*		g_commands[] =
+static			char* g_commands[] =
 {
 	"md5",
 	"sha256",
 	NULL
 };
 
-enum	e_flags
+enum			e_flags
 {
 	echo = 1,
 	quiet,
@@ -51,7 +52,7 @@ enum	e_flags
 	string_sum = 8
 };
 
-enum	e_error_functions
+enum			e_error_functions
 {
 	usage,
 	command_error,
@@ -60,14 +61,15 @@ enum	e_error_functions
 	file_error
 };
 
-typedef struct		s_prc_file
+struct			s_prc_file
 {
 	char		*digest;
 	char		*cmd_name;
+	const char	*file_name;
 	int			fd;
-}					t_prc_file;
+};
 
-typedef struct		s_ssl
+typedef struct	s_ssl
 {
 	int			flags;
 	int			cmd_ind;
@@ -87,8 +89,9 @@ void	process_stdin(t_ssl *ssl);
 void	process_string(t_ssl *ssl, int argc, char const **argv);
 void	process_file(t_ssl *ssl, const char* filename);
 
-int		ft_md5(char const *message, int fd, int print, char **digest);
-int 	ft_sha256(char const *message, int fd, int print, char **digest);
+int		ft_md5(char const *message, t_prc_file *prc, int print, char **digest);
+int 	ft_sha256(char const *message, t_prc_file *prc, int print, \
+	char **digest);
 
 static t_end_wmsg	g_end_with_message[] =
 {

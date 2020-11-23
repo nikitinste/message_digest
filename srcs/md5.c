@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 22:34:56 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/20 23:50:42 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/23 16:22:18 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,14 @@ void	prepare_output(t_md *md, char **digest)
 	ft_sprintf(digest, "%.8x%.8x%.8x%.8x", A, B, C, D);
 }
 
-int		ft_md5(char const *message, int fd, int print, char **digest)
+int		ft_md5(char const *message, t_prc_file *prc, int print, char **digest)
 {
 	t_md	md;
 
 	if (digest == NULL)
 		return (-1);
 	md.str_msg = message;
-	md.fd = fd;
+	md.prc = prc;
 	md.print = print;
 	md5_init(&md);
 	md5_alg(&md);
