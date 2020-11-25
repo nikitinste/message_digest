@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 22:27:35 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/23 16:47:25 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/25 15:38:36 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ enum    		e_commands
 static			char* g_commands[] =
 {
 	"md5",
+	"sha224",
 	"sha256",
+	"sha384",
+	"sha512",
 	NULL
 };
 
@@ -90,7 +93,13 @@ void	process_string(t_ssl *ssl, int argc, char const **argv);
 void	process_file(t_ssl *ssl, const char* filename);
 
 int		ft_md5(char const *message, t_prc_file *prc, int print, char **digest);
+int 	ft_sha224(char const *message, t_prc_file *prc, int print, \
+	char **digest);
 int 	ft_sha256(char const *message, t_prc_file *prc, int print, \
+	char **digest);
+int 	ft_sha384(char const *message, t_prc_file *prc, int print, \
+	char **digest);
+int 	ft_sha512(char const *message, t_prc_file *prc, int print, \
 	char **digest);
 
 static t_end_wmsg	g_end_with_message[] =
@@ -105,7 +114,10 @@ static t_end_wmsg	g_end_with_message[] =
 static t_get_hash	g_get_hash[] =
 {
 	&ft_md5,
-	&ft_sha256
+	&ft_sha256,
+	&ft_sha256,
+	&ft_sha512,
+	&ft_sha512
 };
 
 #endif
