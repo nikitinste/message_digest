@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 19:18:55 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/26 20:45:07 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/26 21:08:01 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,10 +101,9 @@ void md5_alg(t_md *md, t_read *rd)
 	if (!rd->str_msg)
 	{
 		alg.read_size = READ_BUF_SIZE - (READ_BUF_SIZE % 64);
-		if (alg.read_size > 65536 && rd->prc->fd == 0)
-			alg.read_size = 65536;
-		if (alg.read_size < 256)
-			end_with_message("ft_ssl: READ_BUF_SIZE must be at least 256", -1);
+		if (alg.read_size < 256 || alg.read_size > 65536)
+			end_with_message(\
+				"ft_ssl: READ_BUF_SIZE must be between 256 and 65536", -1);
 	}
 	while (read_block(rd, alg))
 	{

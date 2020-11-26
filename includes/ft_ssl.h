@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 22:27:35 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/26 20:45:47 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/26 21:09:23 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ typedef struct		s_common
 {
 	int					block_size;
 	int					length_size;
-	int					read_size;
+	unsigned int		read_size;
 }					t_common;
 
 typedef	int		(*t_end_wmsg)(void *params);
