@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 22:27:35 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/26 19:30:39 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/26 20:45:47 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,10 @@ int 	show_usage(void *params);
 int 	show_command_error(void *params);
 int		show_flag_error(void *params);
 int		show_string_error(void *params);
-int 	show_file_error(void *params);
 void	process_stdin(t_ssl *ssl);
 void	process_string(t_ssl *ssl, int argc, char const **argv);
 void	process_file(t_ssl *ssl, const char* filename);
+int		end_with_message(char *message, int ret);
 
 void	common_init(t_read *rd);
 int		read_block(t_read *rd, t_common alg);
@@ -139,8 +139,7 @@ static t_end_wmsg	g_end_with_message[] =
 	&show_usage,
 	&show_command_error,
 	&show_flag_error,
-	&show_string_error,
-	&show_file_error
+	&show_string_error
 };
 
 static t_get_hash	g_get_hash[] =

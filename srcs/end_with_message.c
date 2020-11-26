@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/26 22:24:33 by uhand             #+#    #+#             */
-/*   Updated: 2020/10/30 19:19:34 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/26 20:38:41 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,8 @@ usage: ft_ssl %s [-pqr] [-s string] [files ...]\n", COMMAND, COMMAND);
 	exit(-1);
 }
 
-int		show_file_error(void *params)
+int		end_with_message(char *message, int ret)
 {
-
-	//
-	exit((int)params);
+	ft_printf("%s\n", message);
+	exit(ret);
 }
