@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 21:16:17 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/16 19:07:08 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/26 18:38:39 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int 	parse_args(t_ssl *ssl, int argc, char const **argv)
 		process_stdin(ssl);
 	ssl->i--;
 	while (++ssl->i < argc)
-		process_file(ssl, argv[ssl->i]);	// работаем с аргументами
+		process_file(ssl, argv[ssl->i]);
 	return (1);
 }
 

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 22:27:35 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/25 15:38:36 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/26 19:30:39 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <fcntl.h>
 #include <errno.h>
 # include "../libft/libft.h"
+
+# define READ_BUF_SIZE 10240
 
 # define COMMAND g_commands[ssl->cmd_ind]
 # define FILE_NAME ssl->av[ssl->i]
@@ -34,7 +36,10 @@ typedef union	u_lala
 enum    		e_commands
 {
     md5,
-    sha256
+	sha224,
+    sha256,
+	sha384,
+	sha512
 };
 
 static			char* g_commands[] =
@@ -66,20 +71,43 @@ enum			e_error_functions
 
 struct			s_prc_file
 {
-	char		*digest;
-	char		*cmd_name;
-	const char	*file_name;
-	int			fd;
+	char				*digest;
+	char				*cmd_name;
+	const char			*file_name;
+	int					fd;
 };
 
 typedef struct	s_ssl
 {
-	int			flags;
-	int			cmd_ind;
-	int			i;
-	int 		ac;
-	char const	**av;
+	int					flags;
+	int					cmd_ind;
+	int					i;
+	int 				ac;
+	char const			**av;
 }				t_ssl;
+
+typedef struct		s_read
+{
+	int					i;
+	int					ret;
+	unsigned char		*ptr;
+	unsigned char		buf[READ_BUF_SIZE];
+	char const 			*str_msg;
+	int					print;
+	unsigned long long	read_count;
+	int					start_uppending;
+	int					finish_reading;
+	t_prc_file			*prc;
+	void				*x;
+	char				*cmd_name;
+}					t_read;
+
+typedef struct		s_common
+{
+	int					block_size;
+	int					length_size;
+	int					read_size;
+}					t_common;
 
 typedef	int		(*t_end_wmsg)(void *params);
 
@@ -91,6 +119,10 @@ int 	show_file_error(void *params);
 void	process_stdin(t_ssl *ssl);
 void	process_string(t_ssl *ssl, int argc, char const **argv);
 void	process_file(t_ssl *ssl, const char* filename);
+
+void	common_init(t_read *rd);
+int		read_block(t_read *rd, t_common alg);
+int		uppend_block(t_read *rd, size_t i, t_common alg);
 
 int		ft_md5(char const *message, t_prc_file *prc, int print, char **digest);
 int 	ft_sha224(char const *message, t_prc_file *prc, int print, \

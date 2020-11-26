@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 22:21:51 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/23 16:51:42 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/25 23:02:00 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define MD5_H
 
 #include "../includes/ft_ssl.h"
-
-# define READ_BUF_SIZE 10240
-# define BLOCK_SIZE 64
 
 # define A md->digest[0]
 # define B md->digest[1]
@@ -29,27 +26,13 @@
 # define X md->x
 # define T g_t
 
-typedef struct		s_read_buf
-{
-	int				i;
-	int				ret;
-	unsigned char	*ptr;
-	unsigned char	buf[READ_BUF_SIZE];
 
-}					t_read_buf;
 
 typedef struct		s_md
 {
-	char const 		*str_msg;
 	unsigned int	digest[4];
 	unsigned int	digest_buf[4];
 	unsigned int	x[16];
-	t_prc_file		*prc;
-	int				print;
-	t_read_buf		rd;
-	size_t			read_count;
-	int				start_uppending;
-	int				finish_reading;
 }					t_md;
 
 static unsigned int	g_t[64] =
@@ -73,7 +56,6 @@ unsigned int	g_ft(unsigned int x, unsigned int y, unsigned int z);
 unsigned int	h_ft(unsigned int x, unsigned int y, unsigned int z);
 unsigned int	i_ft(unsigned int x, unsigned int y, unsigned int z);
 unsigned int	shift(unsigned int val, unsigned int len);
-void			md5_alg(t_md *md);
-int				read_block(t_md *md);
+void			md5_alg(t_md *md, t_read *rd);
 
 #endif
