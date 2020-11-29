@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 22:17:36 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/27 22:28:35 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/29 21:56:17 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ void			sha256_output(t_block_32 *sha, char **digest)
 
 void			sha384_output(t_block_64 *sha, char **digest)
 {
-	ft_sprintf(digest, "%.8lx%.8lx%.8lx%.8lx%.8lx%.8lx%.8lx", \
-		A, B, C, D, E, F, G);
+	ft_sprintf(digest, "%016llx%016llx%016llx%016llx%016llx%016llx", \
+		A, B, C, D, E, F);
 }
 
 void			sha512_output(t_block_64 *sha, char **digest)
 {
-	ft_sprintf(digest, "%.8lx%.8lx%.8lx%.8lx%.8lx%.8lx%.8lx", \
+	ft_sprintf(digest, \
+		"%016llx%016llx%016llx%016llx%016llx%016llx%016llx%016llx", \
 		A, B, C, D, E, F, G, H);
 }

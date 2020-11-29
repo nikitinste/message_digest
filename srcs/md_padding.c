@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 23:57:53 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/28 22:47:54 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/29 21:47:11 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ int		uppend_block(t_read *rd, size_t i, t_common alg)
 	}
 	if ((alg.block_size - i) >= alg.length_size)
 	{
-		ft_bzero(&(block_ptr[i]), (alg.block_size - (i + alg.length_size)));
+		ft_bzero(&(block_ptr[i]), (alg.block_size - i));
+		// ft_bzero(&(block_ptr[i]), (alg.block_size - (i + alg.length_size)));
 		write_length(rd, alg, block_ptr);
 		rd->finish_reading = 1;
 	}

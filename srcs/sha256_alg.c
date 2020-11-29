@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 18:10:17 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/28 23:17:56 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/29 18:33:37 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ unsigned int	maj_4(unsigned int x, unsigned int y, unsigned int z)
 	return ((x & y) ^ (x & z) ^ (y & z));
 }
 
-void	prepare_schedule(t_block_32 *sha)
+void	prepare_schedule_4(t_block_32 *sha)
 {
 	int				t;
 
@@ -66,7 +66,7 @@ void	sha256_alg(t_block_32 *sha, t_read *rd)
 	set_read_buf_size(rd, &alg);
 	while (read_block(rd, alg))
 	{
-		prepare_schedule(sha);
+		prepare_schedule_4(sha);
 		ft_memcpy(&(sha->digest_buf[0]), &(sha->digest[0]), 32);
 		sha256_computations(sha);
 		A += AA;

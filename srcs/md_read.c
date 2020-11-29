@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 17:20:54 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/27 17:45:04 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/29 18:50:30 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ int		read_string(t_read *rd, t_common alg)
 	if	(rd->str_msg[0] == '\0')
 		return (uppend_block(rd, i, alg));
 	block_ptr = (char*)rd->x;
-	while (rd->str_msg[0] != '\0' && i < 64)
+	while (rd->str_msg[0] != '\0' && i < alg.block_size)
 	{
 		block_ptr[i] = rd->str_msg[0];
 		rd->read_count++;
 		rd->str_msg++;
 		i++;
 	}
-	if (i < 64)
+	if (i < alg.block_size)
 		return (uppend_block(rd, i, alg));
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 15:15:53 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/28 17:30:23 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/29 18:31:10 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define HH sha->digest_buf[7]
 # define W sha->w
 # define K4 g_k4
+# define K8 g_k8
 
 typedef struct		s_block_32
 {
@@ -45,7 +46,7 @@ typedef struct		s_block_64
 {
 	unsigned long	digest[8];
 	unsigned long	digest_buf[8];
-	unsigned long	w[64];
+	unsigned long	w[80];
 }					t_block_64;
 
 static unsigned int	g_k4[64] =
@@ -109,5 +110,9 @@ unsigned int	bsig0_4(unsigned int x);
 unsigned int	bsig1_4(unsigned int x);
 unsigned int	ssig0_4(unsigned int x);
 unsigned int	ssig1_4(unsigned int x);
+unsigned long	bsig0_8(unsigned long x);
+unsigned long	bsig1_8(unsigned long x);
+unsigned long	ssig0_8(unsigned long x);
+unsigned long	ssig1_8(unsigned long x);
 
 #endif
