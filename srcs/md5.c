@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 22:34:56 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/26 01:03:24 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/28 17:32:00 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,14 @@ void	md5_init(t_md *md, t_read *rd)
 	C = 0x98BADCFE;
 	D = 0x10325476;
 	rd->x = (void*)md->x;
-	rd->cmd_name = g_commands[md5];
-}
-
-void	flip_word(unsigned int *word)
-{
-	unsigned char *byte;
-	unsigned char buffer;
-
-	byte = (unsigned char *)word;
-	buffer = byte[0];
-	byte[0] = byte[3];
-	byte[3] = buffer;
-	buffer = byte[1];
-	byte[1] = byte[2];
-	byte[2] = buffer;
 }
 
 void	prepare_output(t_md *md, char **digest)
 {
-	flip_word(&A);
-	flip_word(&B);
-	flip_word(&C);
-	flip_word(&D);
+	flip_bytes((unsigned char *)&A, 4);
+	flip_bytes((unsigned char *)&B, 4);
+	flip_bytes((unsigned char *)&C, 4);
+	flip_bytes((unsigned char *)&D, 4);
 	ft_sprintf(digest, "%.8x%.8x%.8x%.8x", A, B, C, D);
 }
 

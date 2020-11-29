@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 15:51:31 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/18 17:12:29 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/27 21:01:56 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ unsigned int	i_ft(unsigned int x, unsigned int y, unsigned int z)
 	return (y ^ (x | ~z));
 }
 
-unsigned int	shift(unsigned int val, unsigned int len)
+unsigned int	rotl(unsigned int val, unsigned int len)
 {
 	unsigned int	reminder;
 

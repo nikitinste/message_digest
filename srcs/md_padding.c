@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 23:57:53 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/26 19:25:54 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/28 22:47:54 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,15 @@ void	write_length(t_read *rd, t_common alg, unsigned char *block_ptr)
 	{
 		l_block_ptr = (unsigned long*)&block_ptr[alg.block_size - 8];
 		l_block_ptr[0] = (unsigned long)(rd->read_count * 8);
+		if (alg.reverse)
+			flip_bytes((unsigned char *)&l_block_ptr[0], 8);
 	}
 	else
 	{
 		ll_block_ptr = (unsigned long long*)&block_ptr[alg.block_size - 16];
 		ll_block_ptr[0] = rd->read_count * 8;
+		if (alg.reverse)
+			flip_bytes((unsigned char *)&ll_block_ptr[0], 16);
 	}
 }
 

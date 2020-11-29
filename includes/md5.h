@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 22:21:51 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/25 23:02:00 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/27 21:02:38 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ unsigned int	f_ft(unsigned int x, unsigned int y, unsigned int z);
 unsigned int	g_ft(unsigned int x, unsigned int y, unsigned int z);
 unsigned int	h_ft(unsigned int x, unsigned int y, unsigned int z);
 unsigned int	i_ft(unsigned int x, unsigned int y, unsigned int z);
-unsigned int	shift(unsigned int val, unsigned int len);
+unsigned int	rotl(unsigned int val, unsigned int len);
 void			md5_alg(t_md *md, t_read *rd);
 
 #endif

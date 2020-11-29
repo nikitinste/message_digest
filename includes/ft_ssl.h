@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 22:27:35 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/26 21:09:23 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/28 22:38:39 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ typedef struct		s_common
 	int					block_size;
 	int					length_size;
 	unsigned int		read_size;
+	int					reverse;
 }					t_common;
 
 typedef	int		(*t_end_wmsg)(void *params);
@@ -120,9 +121,10 @@ void	process_string(t_ssl *ssl, int argc, char const **argv);
 void	process_file(t_ssl *ssl, const char* filename);
 int		end_with_message(char *message, int ret);
 
-void	common_init(t_read *rd);
+void	set_read_buf_size(t_read *rd, t_common *alg);
 int		read_block(t_read *rd, t_common alg);
 int		uppend_block(t_read *rd, size_t i, t_common alg);
+void	flip_bytes(unsigned char *byte, int len);
 
 int		ft_md5(char const *message, t_prc_file *prc, int print, char **digest);
 int 	ft_sha224(char const *message, t_prc_file *prc, int print, \
@@ -145,9 +147,9 @@ static t_end_wmsg	g_end_with_message[] =
 static t_get_hash	g_get_hash[] =
 {
 	&ft_md5,
+	&ft_sha224,
 	&ft_sha256,
-	&ft_sha256,
-	&ft_sha512,
+	&ft_sha384,
 	&ft_sha512
 };
 
