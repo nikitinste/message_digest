@@ -6,13 +6,13 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 17:20:54 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/29 18:50:30 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/29 22:20:32 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/md5.h"
 
-int		read_string(t_read *rd, t_common alg)
+static int	read_string(t_read *rd, t_common alg)
 {
 	size_t	i;
 	char	*block_ptr;
@@ -33,7 +33,7 @@ int		read_string(t_read *rd, t_common alg)
 	return (1);
 }
 
-int		copy_block(t_read *rd, t_common alg)
+static int	copy_block(t_read *rd, t_common alg)
 {
 	int		cpy_size;
 
@@ -56,7 +56,7 @@ int		copy_block(t_read *rd, t_common alg)
 	return (1);
 }
 
-int		read_from_fd(t_read *rd, t_common alg)
+static int	read_from_fd(t_read *rd, t_common alg)
 {
 	if (!rd->ptr && !(rd->ret = read(rd->prc->fd, &rd->buf, alg.read_size)))
 		return (uppend_block(rd, rd->ret, alg));
@@ -78,7 +78,7 @@ int		read_from_fd(t_read *rd, t_common alg)
 	return (0);
 }
 
-int		read_block(t_read *rd, t_common alg)
+int			read_block(t_read *rd, t_common alg)
 {
 	if (rd->finish_reading)
 		return (0);

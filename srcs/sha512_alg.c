@@ -6,23 +6,23 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 22:32:03 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/29 21:36:51 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/29 22:10:58 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sha.h"
 
-unsigned long	ch_8(unsigned long x, unsigned long y, unsigned long z)
+static unsigned long	ch(unsigned long x, unsigned long y, unsigned long z)
 {
 	return ((x & y) ^ (~x & z));
 }
 
-unsigned long	maj_8(unsigned long x, unsigned long y, unsigned long z)
+static unsigned long	maj(unsigned long x, unsigned long y, unsigned long z)
 {
 	return ((x & y) ^ (x & z) ^ (y & z));
 }
 
-void	prepare_schedule_8(t_block_64 *sha)
+static void	prepare_schedule(t_block_64 *sha)
 {
 	int				t;
 
@@ -34,7 +34,7 @@ void	prepare_schedule_8(t_block_64 *sha)
 		W[t] = ssig1_8(W[t - 2]) + W[t - 7] + ssig0_8(W[t - 15]) + W[t - 16];
 }
 
-void	sha512_computations(t_block_64 *sha)
+static void	sha512_computations(t_block_64 *sha)
 {
 	int				t;
 	unsigned long	t1;
@@ -43,8 +43,8 @@ void	sha512_computations(t_block_64 *sha)
 	t = -1;
 	while (++t < 80)
 	{
-		t1 = H + bsig1_8(E) + ch_8(E, F, G) + K8[t] + W[t];
-		t2 = bsig0_8(A) + maj_8(A, B, C);
+		t1 = H + bsig1_8(E) + ch(E, F, G) + K8[t] + W[t];
+		t2 = bsig0_8(A) + maj(A, B, C);
 		H = G;
 	    G = F;
 	    F = E;
@@ -68,7 +68,7 @@ void	sha512_alg(t_block_64 *sha, t_read *rd)
 	set_read_buf_size(rd, &alg);
 	while (read_block(rd, alg))
 	{
-		prepare_schedule_8(sha);
+		prepare_schedule(sha);
 		ft_memcpy(&(sha->digest_buf[0]), &(sha->digest[0]), 64);
 		sha512_computations(sha);
 		A += AA;

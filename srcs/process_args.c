@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 15:01:53 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/28 22:56:25 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/30 00:05:26 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	process_string(t_ssl *ssl, int ac, char const **av)
 	ssl->i++;
 }
 
-void	process_file(t_ssl *ssl, const char* filename)
+void	process_file(t_ssl *ssl)
 {
 	t_prc_file	prc;
 
@@ -71,6 +71,7 @@ void	process_file(t_ssl *ssl, const char* filename)
 		prc.cmd_name = ft_strmap(COMMAND, &ft_toupchar);
 		ft_printf("%s (%s) = %s\n", prc.cmd_name, FILE_NAME, prc.digest);
 	}
+	close(prc.fd);
 	ft_strdel(&prc.digest);
 	ft_strdel(&prc.cmd_name);
 }

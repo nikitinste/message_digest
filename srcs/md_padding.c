@@ -6,13 +6,13 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/25 23:57:53 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/29 21:47:11 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/29 22:11:52 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../includes/ft_ssl.h"
 
-void	write_length(t_read *rd, t_common alg, unsigned char *block_ptr)
+static void	write_length(t_read *rd, t_common alg, unsigned char *block_ptr)
 {
 	unsigned long		*l_block_ptr;
 	unsigned long long	*ll_block_ptr;

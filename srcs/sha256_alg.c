@@ -6,23 +6,23 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 18:10:17 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/29 18:33:37 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/29 22:12:56 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sha.h"
 
-unsigned int	ch_4(unsigned int x, unsigned int y, unsigned int z)
+static unsigned int	ch(unsigned int x, unsigned int y, unsigned int z)
 {
 	return ((x & y) ^ (~x & z));
 }
 
-unsigned int	maj_4(unsigned int x, unsigned int y, unsigned int z)
+static unsigned int	maj(unsigned int x, unsigned int y, unsigned int z)
 {
 	return ((x & y) ^ (x & z) ^ (y & z));
 }
 
-void	prepare_schedule_4(t_block_32 *sha)
+static void	prepare_schedule(t_block_32 *sha)
 {
 	int				t;
 
@@ -34,7 +34,7 @@ void	prepare_schedule_4(t_block_32 *sha)
 		W[t] = ssig1_4(W[t - 2]) + W[t - 7] + ssig0_4(W[t - 15]) + W[t - 16];
 }
 
-void	sha256_computations(t_block_32 *sha)
+static void	sha256_computations(t_block_32 *sha)
 {
 	int				t;
 	unsigned int	t1;
@@ -43,8 +43,8 @@ void	sha256_computations(t_block_32 *sha)
 	t = -1;
 	while (++t < 64)
 	{
-		t1 = H + bsig1_4(E) + ch_4(E, F, G) + K4[t] + W[t];
-		t2 = bsig0_4(A) + maj_4(A, B, C);
+		t1 = H + bsig1_4(E) + ch(E, F, G) + K4[t] + W[t];
+		t2 = bsig0_4(A) + maj(A, B, C);
 		H = G;
 	    G = F;
 	    F = E;
@@ -66,7 +66,7 @@ void	sha256_alg(t_block_32 *sha, t_read *rd)
 	set_read_buf_size(rd, &alg);
 	while (read_block(rd, alg))
 	{
-		prepare_schedule_4(sha);
+		prepare_schedule(sha);
 		ft_memcpy(&(sha->digest_buf[0]), &(sha->digest[0]), 32);
 		sha256_computations(sha);
 		A += AA;

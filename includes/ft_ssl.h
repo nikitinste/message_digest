@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 22:27:35 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/28 22:38:39 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/30 00:05:25 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,9 @@ enum    		e_commands
 	sha224,
     sha256,
 	sha384,
-	sha512
+	sha512,
+	sha512_224,
+	sha512_256
 };
 
 static			char* g_commands[] =
@@ -49,6 +51,8 @@ static			char* g_commands[] =
 	"sha256",
 	"sha384",
 	"sha512",
+	"sha512-224",
+	"sha512-256",
 	NULL
 };
 
@@ -118,7 +122,7 @@ int		show_flag_error(void *params);
 int		show_string_error(void *params);
 void	process_stdin(t_ssl *ssl);
 void	process_string(t_ssl *ssl, int argc, char const **argv);
-void	process_file(t_ssl *ssl, const char* filename);
+void	process_file(t_ssl *ssl);
 int		end_with_message(char *message, int ret);
 
 void	set_read_buf_size(t_read *rd, t_common *alg);
@@ -135,6 +139,10 @@ int 	ft_sha384(char const *message, t_prc_file *prc, int print, \
 	char **digest);
 int 	ft_sha512(char const *message, t_prc_file *prc, int print, \
 	char **digest);
+int 	ft_sha512_224(char const *message, t_prc_file *prc, int print, \
+	char **digest);
+int 	ft_sha512_256(char const *message, t_prc_file *prc, int print, \
+	char **digest);
 
 static t_end_wmsg	g_end_with_message[] =
 {
@@ -150,7 +158,9 @@ static t_get_hash	g_get_hash[] =
 	&ft_sha224,
 	&ft_sha256,
 	&ft_sha384,
-	&ft_sha512
+	&ft_sha512,
+	&ft_sha512_224,
+	&ft_sha512_256
 };
 
 #endif
