@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/29 22:35:17 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/29 23:30:26 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/30 12:19:18 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,10 @@
 static void	sha512_bonus_output(t_block_64 *sha, char **digest, \
 	enum e_commands cmd)
 {
-
 	if (cmd == sha512_224)
-		ft_sprintf(digest, \
-			"%016llx%016llx%016llx%08llx", \
-			A, B, C, D  >> 32);
+		ft_sprintf(digest, "%016llx%016llx%016llx%08llx", A, B, C, D >> 32);
 	else if (cmd == sha512_256)
-		ft_sprintf(digest, \
-			"%016llx%016llx%016llx%016llx", \
-			A, B, C, D);
+		ft_sprintf(digest, "%016llx%016llx%016llx%016llx", A, B, C, D);
 }
 
 static void	sha512_224_init(t_block_64 *sha, t_read *rd)
@@ -54,11 +49,11 @@ static void	sha512_256_init(t_block_64 *sha, t_read *rd)
 	rd->cmd_name = g_commands[sha512_256];
 }
 
-int		ft_sha512_224(char const *message, t_prc_file *prc, int print, \
+int			ft_sha512_224(char const *message, t_prc_file *prc, int print, \
 	char **digest)
 {
 	t_block_64	sha;
-	t_read	rd;
+	t_read		rd;
 
 	if (digest == NULL)
 		return (-1);
@@ -72,11 +67,11 @@ int		ft_sha512_224(char const *message, t_prc_file *prc, int print, \
 	return (1);
 }
 
-int		ft_sha512_256(char const *message, t_prc_file *prc, int print, \
+int			ft_sha512_256(char const *message, t_prc_file *prc, int print, \
 	char **digest)
 {
 	t_block_64	sha;
-	t_read	rd;
+	t_read		rd;
 
 	if (digest == NULL)
 		return (-1);

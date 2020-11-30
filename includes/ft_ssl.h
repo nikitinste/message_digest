@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/07 22:27:35 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/30 00:05:25 by uhand            ###   ########.fr       */
+/*   Created: 2020/11/30 12:22:51 by uhand             #+#    #+#             */
+/*   Updated: 2020/11/30 13:25:01 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,37 +14,30 @@
 # define FT_SSL_H
 
 # include <fcntl.h>
-#include <errno.h>
+# include <errno.h>
 # include "../libft/libft.h"
 
 # define READ_BUF_SIZE 10240
-
 # define COMMAND g_commands[ssl->cmd_ind]
 # define FILE_NAME ssl->av[ssl->i]
 
-typedef struct	s_prc_file t_prc_file;
-typedef	int		(*t_end_wmsg)(void *params);
-typedef int		(*t_get_hash)(char const *message, t_prc_file *prc, int print, \
-	char **digest);
+typedef struct s_prc_file	t_prc_file;
+typedef	int					(*t_end_wmsg)(void *params);
+typedef int					(*t_get_hash)(char const *message, \
+	t_prc_file *prc, int print, char **digest);
 
-typedef union	u_lala
+enum				e_commands
 {
-	unsigned long	a;
-	unsigned int	b[2];
-}				t_lala;
-
-enum    		e_commands
-{
-    md5,
+	md5,
 	sha224,
-    sha256,
+	sha256,
 	sha384,
 	sha512,
 	sha512_224,
 	sha512_256
 };
 
-static			char* g_commands[] =
+static char			*g_commands[8] =
 {
 	"md5",
 	"sha224",
@@ -56,7 +49,7 @@ static			char* g_commands[] =
 	NULL
 };
 
-enum			e_flags
+enum					e_flags
 {
 	echo = 1,
 	quiet,
@@ -64,7 +57,7 @@ enum			e_flags
 	string_sum = 8
 };
 
-enum			e_error_functions
+enum					e_error_functions
 {
 	usage,
 	command_error,
@@ -73,78 +66,77 @@ enum			e_error_functions
 	file_error
 };
 
-struct			s_prc_file
+struct					s_prc_file
 {
-	char				*digest;
-	char				*cmd_name;
-	const char			*file_name;
-	int					fd;
+	char			*digest;
+	char			*cmd_name;
+	const char		*file_name;
+	int				fd;
 };
 
-typedef struct	s_ssl
+typedef struct			s_ssl
 {
-	int					flags;
-	int					cmd_ind;
-	int					i;
-	int 				ac;
-	char const			**av;
-}				t_ssl;
+	int				flags;
+	int				cmd_ind;
+	int				i;
+	int				ac;
+	char const		**av;
+}						t_ssl;
 
-typedef struct		s_read
+typedef struct			s_read
 {
-	int					i;
-	int					ret;
-	unsigned char		*ptr;
-	unsigned char		buf[READ_BUF_SIZE];
-	char const 			*str_msg;
-	int					print;
-	unsigned long long	read_count;
-	int					start_uppending;
-	int					finish_reading;
-	t_prc_file			*prc;
-	void				*x;
-	char				*cmd_name;
-}					t_read;
+	int				i;
+	int				ret;
+	unsigned char	*ptr;
+	unsigned char	buf[READ_BUF_SIZE];
+	char const		*str_msg;
+	int				print;
+	__uint128_t		read_count;
+	int				start_uppending;
+	int				finish_reading;
+	t_prc_file		*prc;
+	void			*x;
+	char			*cmd_name;
+}						t_read;
 
-typedef struct		s_common
+typedef struct			s_common
 {
-	int					block_size;
-	int					length_size;
-	unsigned int		read_size;
-	int					reverse;
-}					t_common;
+	int				block_size;
+	int				length_size;
+	uint32_t		read_size;
+	int				reverse;
+}						t_common;
 
-typedef	int		(*t_end_wmsg)(void *params);
+int						show_usage(void *params);
+int						show_command_error(void *params);
+int						show_flag_error(void *params);
+int						show_string_error(void *params);
+void					process_stdin(t_ssl *ssl);
+void					process_string(t_ssl *ssl, int argc, char const **argv);
+void					process_file(t_ssl *ssl);
+int						end_with_message(char *message, int ret);
 
-int 	show_usage(void *params);
-int 	show_command_error(void *params);
-int		show_flag_error(void *params);
-int		show_string_error(void *params);
-void	process_stdin(t_ssl *ssl);
-void	process_string(t_ssl *ssl, int argc, char const **argv);
-void	process_file(t_ssl *ssl);
-int		end_with_message(char *message, int ret);
+void					set_read_buf_size(t_read *rd, t_common *alg);
+int						read_block(t_read *rd, t_common alg);
+int						uppend_block(t_read *rd, size_t i, t_common alg);
+void					flip_bytes(unsigned char *byte, int len);
 
-void	set_read_buf_size(t_read *rd, t_common *alg);
-int		read_block(t_read *rd, t_common alg);
-int		uppend_block(t_read *rd, size_t i, t_common alg);
-void	flip_bytes(unsigned char *byte, int len);
+int						ft_md5(char const *message, t_prc_file *prc, \
+	int print, char **digest);
+int						ft_sha224(char const *message, t_prc_file *prc, \
+	int print, char **digest);
+int						ft_sha256(char const *message, t_prc_file *prc, \
+	int print, char **digest);
+int						ft_sha384(char const *message, t_prc_file *prc, \
+	int print, char **digest);
+int						ft_sha512(char const *message, t_prc_file *prc, \
+	int print, char **digest);
+int						ft_sha512_224(char const *message, t_prc_file *prc, \
+	int print, char **digest);
+int						ft_sha512_256(char const *message, t_prc_file *prc, \
+	int print, char **digest);
 
-int		ft_md5(char const *message, t_prc_file *prc, int print, char **digest);
-int 	ft_sha224(char const *message, t_prc_file *prc, int print, \
-	char **digest);
-int 	ft_sha256(char const *message, t_prc_file *prc, int print, \
-	char **digest);
-int 	ft_sha384(char const *message, t_prc_file *prc, int print, \
-	char **digest);
-int 	ft_sha512(char const *message, t_prc_file *prc, int print, \
-	char **digest);
-int 	ft_sha512_224(char const *message, t_prc_file *prc, int print, \
-	char **digest);
-int 	ft_sha512_256(char const *message, t_prc_file *prc, int print, \
-	char **digest);
-
-static t_end_wmsg	g_end_with_message[] =
+static t_end_wmsg	g_end_with_message[4] =
 {
 	&show_usage,
 	&show_command_error,
@@ -152,7 +144,7 @@ static t_end_wmsg	g_end_with_message[] =
 	&show_string_error
 };
 
-static t_get_hash	g_get_hash[] =
+static t_get_hash	g_get_hash[7] =
 {
 	&ft_md5,
 	&ft_sha224,

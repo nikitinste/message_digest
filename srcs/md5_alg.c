@@ -6,11 +6,11 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 19:18:55 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/29 15:14:40 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/30 12:20:11 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../includes/md5.h"
+#include "../includes/md5.h"
 
 void	round_1(t_md *md)
 {
@@ -92,7 +92,7 @@ void	round_4(t_md *md)
 	B = C + rotl((B + i_ft(C, D, A) + X[9] + T[63]), 21);
 }
 
-void md5_alg(t_md *md, t_read *rd)
+void	md5_alg(t_md *md, t_read *rd)
 {
 	t_common	alg;
 

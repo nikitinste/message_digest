@@ -6,14 +6,14 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 22:21:51 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/27 21:02:38 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/30 12:33:46 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MD5_H
 # define MD5_H
 
-#include "../includes/ft_ssl.h"
+# include "../includes/ft_ssl.h"
 
 # define A md->digest[0]
 # define B md->digest[1]
@@ -26,16 +26,14 @@
 # define X md->x
 # define T g_t
 
-
-
-typedef struct		s_md
+typedef struct	s_md
 {
-	unsigned int	digest[4];
-	unsigned int	digest_buf[4];
-	unsigned int	x[16];
-}					t_md;
+	uint32_t	digest[4];
+	uint32_t	digest_buf[4];
+	uint32_t	x[16];
+}				t_md;
 
-static unsigned int	g_t[64] =
+static uint32_t	g_t[64] =
 {
 	0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee, 0xf57c0faf, 0x4787c62a,
 	0xa8304613, 0xfd469501, 0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be,
@@ -50,12 +48,11 @@ static unsigned int	g_t[64] =
 	0xf7537e82, 0xbd3af235, 0x2ad7d2bb, 0xeb86d391
 };
 
-
-unsigned int	f_ft(unsigned int x, unsigned int y, unsigned int z);
-unsigned int	g_ft(unsigned int x, unsigned int y, unsigned int z);
-unsigned int	h_ft(unsigned int x, unsigned int y, unsigned int z);
-unsigned int	i_ft(unsigned int x, unsigned int y, unsigned int z);
-unsigned int	rotl(unsigned int val, unsigned int len);
+uint32_t		f_ft(uint32_t x, uint32_t y, uint32_t z);
+uint32_t		g_ft(uint32_t x, uint32_t y, uint32_t z);
+uint32_t		h_ft(uint32_t x, uint32_t y, uint32_t z);
+uint32_t		i_ft(uint32_t x, uint32_t y, uint32_t z);
+uint32_t		rotl(uint32_t val, uint32_t len);
 void			md5_alg(t_md *md, t_read *rd);
 
 #endif

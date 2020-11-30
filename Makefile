@@ -6,7 +6,7 @@
 #    By: uhand <uhand@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 15:36:27 by uhand             #+#    #+#              #
-#    Updated: 2020/11/30 00:06:16 by uhand            ###   ########.fr        #
+#    Updated: 2020/11/30 10:42:50 by uhand            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ sha_512_bonus.c sha_output.c md_read.c md_padding.c md_common.c
 OBJ = $(addprefix $(OBJPATH)/,$(SRC:.c=.o))
 OBJPATH = ./objects
 
-FLAGS = -g #-Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror
 LIB = -L ./libft -lft
 LIBPATH = ./libft
 

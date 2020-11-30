@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 15:01:53 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/30 00:05:26 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/30 12:00:16 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	process_file(t_ssl *ssl)
 	t_prc_file	prc;
 
 	ft_bzero(&prc, sizeof(prc));
-	prc.fd = open(FILE_NAME , O_RDONLY);
+	prc.fd = open(FILE_NAME, O_RDONLY);
 	if (prc.fd == -1)
 	{
 		ft_printf("ft_ssl: %s: %s: %s\n", COMMAND, FILE_NAME, strerror(errno));

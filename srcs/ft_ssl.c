@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 21:16:17 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/30 00:05:34 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/30 11:58:46 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	parse_flags(t_ssl *ssl, int argc, char const **argv)
 	}
 }
 
-int 	parse_args(t_ssl *ssl, int argc, char const **argv)
+int		parse_args(t_ssl *ssl, int argc, char const **argv)
 {
 	ssl->i = -1;
 	ssl->cmd_ind = -1;
@@ -47,7 +47,7 @@ int 	parse_args(t_ssl *ssl, int argc, char const **argv)
 		if (ft_strcmp(argv[1], g_commands[ssl->i]) == 0)
 		{
 			ssl->cmd_ind = ssl->i;
-			break;
+			break ;
 		}
 	if (ssl->cmd_ind == -1)
 		g_end_with_message[command_error]((void*)argv[1]);
@@ -66,15 +66,15 @@ int 	parse_args(t_ssl *ssl, int argc, char const **argv)
 	return (1);
 }
 
-int main(int argc, char const **argv)
+int		main(int argc, char const **argv)
 {
 	t_ssl	ssl;
 
 	if (argc < 2)
-        g_end_with_message[usage](0);
+		g_end_with_message[usage](0);
 	ft_bzero(&ssl, sizeof(ssl));
 	ssl.ac = argc;
 	ssl.av = argv;
 	parse_args(&ssl, argc, argv);
-    return 0;
+	return (0);
 }

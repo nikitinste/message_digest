@@ -6,14 +6,14 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 15:15:53 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/29 18:31:10 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/30 12:49:12 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SHA_H
 # define SHA_H
 
-#include "../includes/ft_ssl.h"
+# include "../includes/ft_ssl.h"
 
 # define A sha->digest[0]
 # define B sha->digest[1]
@@ -37,19 +37,19 @@
 
 typedef struct		s_block_32
 {
-	unsigned int	digest[8];
-	unsigned int	digest_buf[8];
-	unsigned int	w[64];
+	uint32_t	digest[8];
+	uint32_t	digest_buf[8];
+	uint32_t	w[64];
 }					t_block_32;
 
 typedef struct		s_block_64
 {
-	unsigned long	digest[8];
-	unsigned long	digest_buf[8];
-	unsigned long	w[80];
+	uint64_t	digest[8];
+	uint64_t	digest_buf[8];
+	uint64_t	w[80];
 }					t_block_64;
 
-static unsigned int	g_k4[64] =
+static uint32_t	g_k4[64] =
 {
 	0x428A2F98, 0x71374491, 0xB5C0FBCF, 0xE9B5DBA5, 0x3956C25B, 0x59F111F1,
 	0x923F82A4, 0xAB1C5ED5, 0xD807AA98, 0x12835B01, 0x243185BE, 0x550C7DC3,
@@ -64,7 +64,7 @@ static unsigned int	g_k4[64] =
 	0x90BEFFFA, 0xA4506CEB, 0xBEF9A3F7, 0xC67178F2
 };
 
-static unsigned long	g_k8[80] =
+static uint64_t	g_k8[80] =
 {
 	0x428a2f98d728ae22, 0x7137449123ef65cd, 0xb5c0fbcfec4d3b2f,
 	0xe9b5dba58189dbbc, 0x3956c25bf348b538, 0x59f111f1b605d019,
@@ -95,24 +95,24 @@ static unsigned long	g_k8[80] =
 	0x5fcb6fab3ad6faec, 0x6c44198c4a475817
 };
 
-void			sha224_init(t_block_32 *sha, t_read *rd);
-void			sha256_init(t_block_32 *sha, t_read *rd);
-void			sha384_init(t_block_64 *sha, t_read *rd);
-void			sha512_init(t_block_64 *sha, t_read *rd);
-void			sha256_alg(t_block_32 *sha, t_read *rd);
-void			sha512_alg(t_block_64 *sha, t_read *rd);
-void			sha224_output(t_block_32 *sha, char **digest);
-void			sha256_output(t_block_32 *sha, char **digest);
-void			sha384_output(t_block_64 *sha, char **digest);
-void			sha512_output(t_block_64 *sha, char **digest);
+void				sha224_init(t_block_32 *sha, t_read *rd);
+void				sha256_init(t_block_32 *sha, t_read *rd);
+void				sha384_init(t_block_64 *sha, t_read *rd);
+void				sha512_init(t_block_64 *sha, t_read *rd);
+void				sha256_alg(t_block_32 *sha, t_read *rd);
+void				sha512_alg(t_block_64 *sha, t_read *rd);
+void				sha224_output(t_block_32 *sha, char **digest);
+void				sha256_output(t_block_32 *sha, char **digest);
+void				sha384_output(t_block_64 *sha, char **digest);
+void				sha512_output(t_block_64 *sha, char **digest);
 
-unsigned int	bsig0_4(unsigned int x);
-unsigned int	bsig1_4(unsigned int x);
-unsigned int	ssig0_4(unsigned int x);
-unsigned int	ssig1_4(unsigned int x);
-unsigned long	bsig0_8(unsigned long x);
-unsigned long	bsig1_8(unsigned long x);
-unsigned long	ssig0_8(unsigned long x);
-unsigned long	ssig1_8(unsigned long x);
+uint32_t			bsig0_4(uint32_t x);
+uint32_t			bsig1_4(uint32_t x);
+uint32_t			ssig0_4(uint32_t x);
+uint32_t			ssig1_4(uint32_t x);
+uint64_t			bsig0_8(uint64_t x);
+uint64_t			bsig1_8(uint64_t x);
+uint64_t			ssig0_8(uint64_t x);
+uint64_t			ssig1_8(uint64_t x);
 
 #endif

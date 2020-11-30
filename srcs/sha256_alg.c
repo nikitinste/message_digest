@@ -6,23 +6,23 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/27 18:10:17 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/29 22:12:56 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/30 12:04:25 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sha.h"
 
-static unsigned int	ch(unsigned int x, unsigned int y, unsigned int z)
+static uint32_t	ch(uint32_t x, uint32_t y, uint32_t z)
 {
 	return ((x & y) ^ (~x & z));
 }
 
-static unsigned int	maj(unsigned int x, unsigned int y, unsigned int z)
+static uint32_t	maj(uint32_t x, uint32_t y, uint32_t z)
 {
 	return ((x & y) ^ (x & z) ^ (y & z));
 }
 
-static void	prepare_schedule(t_block_32 *sha)
+static void		prepare_schedule(t_block_32 *sha)
 {
 	int				t;
 
@@ -34,11 +34,11 @@ static void	prepare_schedule(t_block_32 *sha)
 		W[t] = ssig1_4(W[t - 2]) + W[t - 7] + ssig0_4(W[t - 15]) + W[t - 16];
 }
 
-static void	sha256_computations(t_block_32 *sha)
+static void		sha256_computations(t_block_32 *sha)
 {
-	int				t;
-	unsigned int	t1;
-	unsigned int	t2;
+	int			t;
+	uint32_t	t1;
+	uint32_t	t2;
 
 	t = -1;
 	while (++t < 64)
@@ -46,17 +46,17 @@ static void	sha256_computations(t_block_32 *sha)
 		t1 = H + bsig1_4(E) + ch(E, F, G) + K4[t] + W[t];
 		t2 = bsig0_4(A) + maj(A, B, C);
 		H = G;
-	    G = F;
-	    F = E;
-	    E = D + t1;
-	    D = C;
-	    C = B;
-	    B = A;
-	    A = t1 + t2;
+		G = F;
+		F = E;
+		E = D + t1;
+		D = C;
+		C = B;
+		B = A;
+		A = t1 + t2;
 	}
 }
 
-void	sha256_alg(t_block_32 *sha, t_read *rd)
+void			sha256_alg(t_block_32 *sha, t_read *rd)
 {
 	t_common	alg;
 
