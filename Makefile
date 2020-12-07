@@ -21,7 +21,7 @@ sha_512_bonus.c sha_output.c md_read.c md_padding.c md_common.c
 OBJ = $(addprefix $(OBJPATH)/,$(SRC:.c=.o))
 OBJPATH = ./objects
 
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 LIB = -L ./libft -lft
 LIBPATH = ./libft
 

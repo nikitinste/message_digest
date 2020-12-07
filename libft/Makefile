@@ -41,7 +41,7 @@ SRC_2 = $(addprefix ft_printf/,$(SRC_PF))
 
 OBJ = $(SRC:.c=.o) $(SRC_2:.c=.o)
 
-FLAGS = -g #-fsanitize=address -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 

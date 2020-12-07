@@ -17,7 +17,7 @@ pft_float_itoa.c pft_float_itoa_2.c pft_float_itoa_3.c double_rep.c \
 ft_sprintf.c ft_fdprintf.c
 
 OBJ = $(SRC:.c=.o)
-FLAGS = -g #-fsanitize=address -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror
 LIBPATH = ../
 
 all: $(OBJ)

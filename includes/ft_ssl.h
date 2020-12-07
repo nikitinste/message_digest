@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 12:22:51 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/30 13:25:01 by uhand            ###   ########.fr       */
+/*   Updated: 2020/12/07 19:00:46 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <errno.h>
 # include "../libft/libft.h"
 
-# define READ_BUF_SIZE 10240
+# define READ_BUF_SIZE 16384
 # define COMMAND g_commands[ssl->cmd_ind]
 # define FILE_NAME ssl->av[ssl->i]
 

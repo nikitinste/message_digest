@@ -6,13 +6,13 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/07 21:16:17 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/30 11:58:46 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/30 13:50:16 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ssl.h"
 
-void	parse_flags(t_ssl *ssl, int argc, char const **argv)
+static void	parse_flags(t_ssl *ssl, int argc, char const **argv)
 {
 	while (ssl->i < argc && argv[ssl->i][0] == '-')
 	{
@@ -39,7 +39,7 @@ void	parse_flags(t_ssl *ssl, int argc, char const **argv)
 	}
 }
 
-int		parse_args(t_ssl *ssl, int argc, char const **argv)
+static int	parse_args(t_ssl *ssl, int argc, char const **argv)
 {
 	ssl->i = -1;
 	ssl->cmd_ind = -1;
@@ -66,7 +66,7 @@ int		parse_args(t_ssl *ssl, int argc, char const **argv)
 	return (1);
 }
 
-int		main(int argc, char const **argv)
+int			main(int argc, char const **argv)
 {
 	t_ssl	ssl;
 

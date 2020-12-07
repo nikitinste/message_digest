@@ -6,13 +6,13 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 22:34:56 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/30 11:55:20 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/30 13:54:08 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/md5.h"
 
-void	md5_init(t_md *md, t_read *rd)
+static void	md5_init(t_md *md, t_read *rd)
 {
 	A = 0x67452301;
 	B = 0xEFCDAB89;
@@ -21,7 +21,7 @@ void	md5_init(t_md *md, t_read *rd)
 	rd->x = (void*)md->x;
 }
 
-void	prepare_output(t_md *md, char **digest)
+static void	prepare_output(t_md *md, char **digest)
 {
 	flip_bytes((unsigned char *)&A, 4);
 	flip_bytes((unsigned char *)&B, 4);
@@ -30,7 +30,8 @@ void	prepare_output(t_md *md, char **digest)
 	ft_sprintf(digest, "%.8x%.8x%.8x%.8x", A, B, C, D);
 }
 
-int		ft_md5(char const *message, t_prc_file *prc, int print, char **digest)
+int			ft_md5(char const *message, t_prc_file *prc, int print, \
+	char **digest)
 {
 	t_md	md;
 	t_read	rd;

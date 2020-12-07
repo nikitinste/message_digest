@@ -6,13 +6,13 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 19:18:55 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/30 12:20:11 by uhand            ###   ########.fr       */
+/*   Updated: 2020/11/30 13:51:12 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/md5.h"
 
-void	round_1(t_md *md)
+static void	round_1(t_md *md)
 {
 	A = B + rotl((A + f_ft(B, C, D) + X[0] + T[0]), 7);
 	D = A + rotl((D + f_ft(A, B, C) + X[1] + T[1]), 12);
@@ -32,7 +32,7 @@ void	round_1(t_md *md)
 	B = C + rotl((B + f_ft(C, D, A) + X[15] + T[15]), 22);
 }
 
-void	round_2(t_md *md)
+static void	round_2(t_md *md)
 {
 	A = B + rotl((A + g_ft(B, C, D) + X[1] + T[16]), 5);
 	D = A + rotl((D + g_ft(A, B, C) + X[6] + T[17]), 9);
@@ -52,7 +52,7 @@ void	round_2(t_md *md)
 	B = C + rotl((B + g_ft(C, D, A) + X[12] + T[31]), 20);
 }
 
-void	round_3(t_md *md)
+static void	round_3(t_md *md)
 {
 	A = B + rotl((A + h_ft(B, C, D) + X[5] + T[32]), 4);
 	D = A + rotl((D + h_ft(A, B, C) + X[8] + T[33]), 11);
@@ -72,7 +72,7 @@ void	round_3(t_md *md)
 	B = C + rotl((B + h_ft(C, D, A) + X[2] + T[47]), 23);
 }
 
-void	round_4(t_md *md)
+static void	round_4(t_md *md)
 {
 	A = B + rotl((A + i_ft(B, C, D) + X[0] + T[48]), 6);
 	D = A + rotl((D + i_ft(A, B, C) + X[7] + T[49]), 10);
@@ -92,7 +92,7 @@ void	round_4(t_md *md)
 	B = C + rotl((B + i_ft(C, D, A) + X[9] + T[63]), 21);
 }
 
-void	md5_alg(t_md *md, t_read *rd)
+void		md5_alg(t_md *md, t_read *rd)
 {
 	t_common	alg;
 
