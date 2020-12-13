@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 00:06:30 by uhand             #+#    #+#             */
-/*   Updated: 2020/12/10 12:34:27 by uhand            ###   ########.fr       */
+/*   Updated: 2020/12/13 22:59:34 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	set_read_buf_size(t_read *rd, t_common *alg)
 		alg->read_size = READ_BUF_SIZE - (READ_BUF_SIZE % alg->block_size);
 		if (alg->read_size < 256 || alg->read_size > 65536)
 			end_with_message(\
-				"ft_ssl: READ_BUF_SIZE must be between 256 and 65536", -1);
+				"ft_ssl: READ_BUF_SIZE must be between 256 and 65536", \
+				NULL, -1);
 	}
 }
 

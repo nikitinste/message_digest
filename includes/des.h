@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/10 15:00:08 by uhand             #+#    #+#             */
-/*   Updated: 2020/12/10 15:00:50 by uhand            ###   ########.fr       */
+/*   Updated: 2020/12/13 22:25:57 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,6 @@
 
 # include "../includes/ft_ssl.h"
 
-typedef struct			s_des
-{
-	int				mode;
-}						t_des;
+
 
 #endif

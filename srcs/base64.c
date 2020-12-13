@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/07 21:58:54 by uhand             #+#    #+#             */
-/*   Updated: 2020/12/11 23:29:12 by uhand            ###   ########.fr       */
+/*   Updated: 2020/12/13 23:32:19 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int		ft_base64(t_ssl *ssl)
 	if ((ssl->flags & decode) && !(ssl->flags & encode))
 		base.mode = decode;
 	else if ((ssl->flags & decode) && (ssl->flags & encode))
-		end_with_message("ft_ssl: base64: mutually exclusive options -- d | e\n\
-usage: ft_ssl base64 [-d|e] [-i in_file] [-o out_file]", -1);
+		end_with_message("mutually exclusive options -- d | e", (void*)ssl, -1);
 	ft_printf("base64:\n");
 	if (ssl->flags & decode)
 		ft_printf("decode\n");

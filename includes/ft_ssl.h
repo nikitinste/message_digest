@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/30 12:22:51 by uhand             #+#    #+#             */
-/*   Updated: 2020/12/13 18:29:00 by uhand            ###   ########.fr       */
+/*   Updated: 2020/12/13 23:42:21 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,10 @@ enum					e_groups
 
 static char			*g_usage[3] =
 {
-	"usage: ft_ssl %s [-pqr] [-s string] [files ...]\n",
-	"usage: ft_ssl %s [-d|e] [-i in_file] [-o out_file]\n",
-	"usage: ft_ssl %s \n"
+	"[-pqr] [-s string] [files ...]",
+	"[-d|e] [-i in_file] [-o out_file]",
+	"[-a] [-d|e] [-i in_file] [-o out_file] [-k key] [-p pass] [-s salt] \
+[-v vector]"
 };
 
 enum					e_md_flags
@@ -212,7 +213,7 @@ void					parse_des_flags(t_ssl *ssl, const char **args);
 void					process_stdin(t_ssl *ssl);
 void					process_string(t_ssl *ssl);
 void					process_file(t_ssl *ssl);
-int						end_with_message(char *message, int ret);
+int						end_with_message(char *message, void *params, int ret);
 int						get_group_ind(int cmd_ind);
 
 void					set_read_buf_size(t_read *rd, t_common *alg);
