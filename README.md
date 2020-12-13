@@ -1,1 +1,3 @@
-# message_digest_5
+# message_digest
+
+school 42 cryptography curriculum project
