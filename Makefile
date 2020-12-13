@@ -6,7 +6,7 @@
 #    By: uhand <uhand@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 15:36:27 by uhand             #+#    #+#              #
-#    Updated: 2020/11/30 10:42:50 by uhand            ###   ########.fr        #
+#    Updated: 2020/12/09 14:09:42 by uhand            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,15 @@ NAME = ft_ssl
 
 HEAD = ./includes
 SRCPATH = ./srcs
-SRC = ft_ssl.c end_with_message.c process_args.c md5.c md5_fghi.c md5_alg.c \
-sha.c sha_init.c sha256_alg.c sha256_funcs.c sha512_alg.c sha512_funcs.c \
-sha_512_bonus.c sha_output.c md_read.c md_padding.c md_common.c
+SRC = ft_ssl.c end_with_message.c process_args.c parse_flags.c md5.c \
+md5_fghi.c md5_alg.c sha.c sha_init.c sha256_alg.c sha256_funcs.c sha512_alg.c \
+sha512_funcs.c sha_512_bonus.c sha_output.c md_read.c md_padding.c md_common.c \
+base64.c des.c
 
 OBJ = $(addprefix $(OBJPATH)/,$(SRC:.c=.o))
 OBJPATH = ./objects
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -g #-fsanitize=address#-Wall -Wextra -Werror
 LIB = -L ./libft -lft
 LIBPATH = ./libft
 

@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 15:01:53 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/30 12:00:16 by uhand            ###   ########.fr       */
+/*   Updated: 2020/12/11 20:18:33 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,26 @@ void	process_stdin(t_ssl *ssl)
 	ft_strdel(&prc.digest);
 }
 
-void	process_string(t_ssl *ssl, int ac, char const **av)
+void	process_string(t_ssl *ssl)
 {
 	char	*digest;
 	char	*cmd_name;
 
-	if (av[ssl->i][0] != '\0')
-		g_get_hash[ssl->cmd_ind](av[ssl->i], NULL, 0, &digest);
-	else if (++ssl->i < ac)
-		g_get_hash[ssl->cmd_ind](av[ssl->i], NULL, 0, &digest);
+	if (ssl->av[ssl->i][1] != '\0')
+		g_get_hash[ssl->cmd_ind](ssl->av[ssl->i], NULL, 0, &digest);
+	else if ((ssl->i + 1) < ssl->ac)
+		g_get_hash[ssl->cmd_ind](ssl->av[++ssl->i], NULL, 0, &digest);
 	else
-		g_end_with_message[string_error]((void*)ssl);
+		g_end_with_message[arg_error]((void*)ssl);
 	cmd_name = NULL;
 	if (ssl->flags & quiet)
 		ft_printf("%s\n", digest);
 	else if (ssl->flags & reverse)
-		ft_printf("%s \"%s\"\n", digest, av[ssl->i]);
+		ft_printf("%s \"%s\"\n", digest, ssl->av[ssl->i]);
 	else
 	{
 		cmd_name = ft_strmap(COMMAND, &ft_toupchar);
-		ft_printf("%s (\"%s\") = %s\n", cmd_name, av[ssl->i], digest);
+		ft_printf("%s (\"%s\") = %s\n", cmd_name, ssl->av[ssl->i], digest);
 	}
 	ft_strdel(&digest);
 	ft_strdel(&cmd_name);

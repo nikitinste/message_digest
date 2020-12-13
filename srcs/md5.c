@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 22:34:56 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/30 13:54:08 by uhand            ###   ########.fr       */
+/*   Updated: 2020/12/10 12:37:04 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	md5_init(t_md *md, t_read *rd)
 	C = 0x98BADCFE;
 	D = 0x10325476;
 	rd->x = (void*)md->x;
+	rd->cmd_name = g_commands[md5];
 }
 
 static void	prepare_output(t_md *md, char **digest)

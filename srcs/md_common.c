@@ -6,7 +6,7 @@
 /*   By: uhand <uhand@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 00:06:30 by uhand             #+#    #+#             */
-/*   Updated: 2020/11/29 16:04:43 by uhand            ###   ########.fr       */
+/*   Updated: 2020/12/10 12:34:27 by uhand            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,14 @@ void	flip_bytes(unsigned char *byte, int len)
 		byte[len - i - 1] = buffer;
 		i++;
 	}
+}
+
+int		get_group_ind(int cmd_ind)
+{
+	int		group_ind;
+	if ((cmd_ind - 6) <= 0)
+		group_ind = 0;
+	else
+		group_ind = (cmd_ind == 7) ? 1 : 2;
+	return (group_ind);
 }
